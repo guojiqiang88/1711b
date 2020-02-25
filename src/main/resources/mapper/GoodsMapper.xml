@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bw.mapper.GoodsMapper">
+<select id="sel" resultType="com.bw.bean.Goods" parameterType="com.bw.bean.Goods">
+SELECT * FROM
+(SELECT g.*,t.type,b.brand FROM type t,brand b,goods g 
+where t.tid=g.tid and g.bid = b.bid ORDER BY g.gid)p 
+WHERE gid=#{gid} and name like '%${name}%'
+
+</select>
+
+<select id="addBrand" resultType="com.bw.bean.Brand" parameterType="com.bw.bean.Brand">
+select * from brand
+</select>
+<select id="kind" resultType="com.bw.bean.Type" parameterType="com.bw.bean.Type">
+select * from Type
+</select>
+public void addAll(Goods g);
+<insert id="addAll" parameterType="com.bw.bean.Goods">
+insert into
+goods(name,ename,brand,type,rize,price,num,bq,imgurl)
+values(#{name},#{ename},#{brand},#{type},#{rize},#{num},#{bq},#{imgurl})
+
+</insert>
+</mapper> 
